@@ -1,0 +1,110 @@
+<div class="row">
+
+  <div class="col-12 text-center" *ngFor="let result of latestResults">
+    <h4>
+      {{result.raceName}} Results {{year}}
+    </h4>
+  </div>
+</div>
+
+<app-side-menu></app-side-menu>
+
+<div *ngFor="let result of latestResults">
+  <div *ngFor="let res of result.Results">
+
+    <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
+
+      <div class="p-1">
+        <div class="small border-bottom border-primary">Position</div>
+        {{res.position}}
+      </div>
+      <div class="p-1">
+        <div class="small border-bottom border-warning">{{res.Driver.givenName}} {{res.Driver.familyName}} <span>[{{res.number}}]</span>
+        </div>
+        <span *ngIf="res.Driver.nationality === ''">
+              {{res.Driver.nationality}}
+            </span>
+        <span *ngIf="res.Driver.nationality === 'German'">
+              <img src="http://www.countryflags.io/de/flat/24.png">
+            </span>
+        <span *ngIf="res.Driver.nationality === 'British'">
+              <img src="http://www.countryflags.io/gb/flat/24.png">
+            </span>
+        <span *ngIf="res.Driver.nationality === 'Finnish'">
+              <img src="http://www.countryflags.io/fi/flat/24.png">
+            </span>
+        <span *ngIf="res.Driver.nationality === 'Australian'">
+              <img src="http://www.countryflags.io/au/flat/24.png">
+            </span>
+        <span *ngIf="res.Driver.nationality === 'Spanish'">
+              <img src="http://www.countryflags.io/es/flat/24.png">
+            </span>
+        <span *ngIf="res.Driver.nationality === 'Dutch'">
+              <img src="http://www.countryflags.io/nl/flat/24.png">
+            </span>
+        <span *ngIf="res.Driver.nationality === 'Belgian'">
+              <img src="http://www.countryflags.io/be/flat/24.png">
+            </span>
+        <span *ngIf="res.Driver.nationality === 'Mexican'">
+              <img src="http://www.countryflags.io/mx/flat/24.png">
+            </span>
+        <span *ngIf="res.Driver.nationality === 'French'">
+              <img src="http://www.countryflags.io/fr/flat/24.png">
+            </span>
+        <span *ngIf="res.Driver.nationality === 'Monegasque'">
+              <img src="http://www.countryflags.io/mc/flat/24.png">
+            </span>
+        <span *ngIf="res.Driver.nationality === 'Canadian'">
+              <img src="http://www.countryflags.io/ca/flat/24.png">
+            </span>
+        <span *ngIf="res.Driver.nationality === 'New Zealander'">
+              <img src="http://www.countryflags.io/nz/flat/24.png">
+            </span>
+        <span *ngIf="res.Driver.nationality === 'Danish'">
+              <img src="http://www.countryflags.io/dk/flat/24.png">
+            </span>
+        <span *ngIf="res.Driver.nationality === 'Swedish'">
+              <img src="http://www.countryflags.io/se/flat/24.png">
+            </span>
+        <span *ngIf="res.Driver.nationality === 'Russian'">
+              <img src="http://www.countryflags.io/ru/flat/24.png">
+            </span>
+      </div>
+      <div class="p-1">
+        <div class="small border-bottom border-primary">Pole</div>
+        {{res.grid}}
+      </div>
+      <div class="p-1">
+        <div class="small border-bottom border-warning">Laps</div>
+        {{res.laps}}
+      </div>
+      <div class="p-1">
+        <div class="small border-bottom border-primary">Time</div>
+        <span *ngIf="res.Time?.time.length == 0">DNF</span>
+        {{res.Time?.time}}
+      </div>
+      <div class="p-1">
+        <div class="small border-bottom border-warning">Status</div>
+        {{res.status}}
+      </div>
+      <div class="p-1">
+        <div class="small border-bottom border-primary">Lap</div>
+        {{res.FastestLap?.lap}}
+      </div>
+      <div class="p-1">
+        <div class="small border-bottom border-warning">Rank</div>
+        {{res.FastestLap?.rank}}
+      </div>
+      <div class="p-1">
+        <div class="small border-bottom border-primary">Best Time</div>
+        {{res.FastestLap?.Time.time}}
+      </div>
+      <div class="p-1">
+        <div class="small border-bottom border-warning">Speed</div>
+        {{res.FastestLap?.AverageSpeed.speed}} <span class="small">{{res.FastestLap?.AverageSpeed?.units}}</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+

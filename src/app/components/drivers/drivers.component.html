@@ -1,0 +1,92 @@
+<section id="drivers">
+  <div class="text-center">
+    <h3>Drivers</h3>
+  </div>
+  <div class="selectWrapper">
+    <select #foo (click)="yearDropDown(foo.value)">
+      <option [value]="null" selected>Select Year</option>
+      <option *ngFor="let list of yearDropDownList"
+              [value]="list"
+      >{{list}}
+      </option>
+    </select>
+  </div>
+
+  <hr class="style">
+
+  <div class="grid_container">
+    <div class="grid_item" *ngFor="let driver of drivers">
+      [{{driver.permanentNumber}}]
+      <small>Drivers Permanent Number</small>
+      <span><p class="h5">{{driver.givenName}}
+          {{driver.familyName}}</p>
+      </span>
+      <div>
+        <small>Born: {{driver.dateOfBirth}}</small>
+      </div>
+      {{driver.nationality}}
+
+      <span *ngIf="driver.nationality === ''">
+              {{driver.nationality}}
+            </span>
+      <span *ngIf="driver.nationality === 'American'">
+              <img src="http://www.countryflags.io/us/flat/24.png">
+            </span>
+
+      <span *ngIf="driver.nationality === 'Brazilian'">
+              <img src="http://www.countryflags.io/br/flat/24.png">
+            </span>
+
+      <span *ngIf="driver.nationality === 'German'">
+              <img src="http://www.countryflags.io/de/flat/24.png">
+            </span>
+      <span *ngIf="driver.nationality === 'British'">
+              <img src="http://www.countryflags.io/gb/flat/24.png">
+            </span>
+      <span *ngIf="driver.nationality === 'Finnish'">
+              <img src="http://www.countryflags.io/fi/flat/24.png">
+            </span>
+      <span *ngIf="driver.nationality === 'Australian'">
+              <img src="http://www.countryflags.io/au/flat/24.png">
+            </span>
+      <span *ngIf="driver.nationality === 'Spanish'">
+              <img src="http://www.countryflags.io/es/flat/24.png">
+            </span>
+      <span *ngIf="driver.nationality === 'Dutch'">
+              <img src="http://www.countryflags.io/nl/flat/24.png">
+            </span>
+      <span *ngIf="driver.nationality === 'Belgian'">
+              <img src="http://www.countryflags.io/be/flat/24.png">
+            </span>
+      <span *ngIf="driver.nationality === 'Mexican'">
+              <img src="http://www.countryflags.io/mx/flat/24.png">
+            </span>
+      <span *ngIf="driver.nationality === 'French'">
+              <img src="http://www.countryflags.io/fr/flat/24.png">
+            </span>
+      <span *ngIf="driver.nationality === 'Monegasque'">
+              <img src="http://www.countryflags.io/mc/flat/24.png">
+            </span>
+      <span *ngIf="driver.nationality === 'Canadian'">
+              <img src="http://www.countryflags.io/ca/flat/24.png">
+            </span>
+      <span *ngIf="driver.nationality === 'New Zealander'">
+              <img src="http://www.countryflags.io/nz/flat/24.png">
+            </span>
+      <span *ngIf="driver.nationality === 'Danish'">
+              <img src="http://www.countryflags.io/dk/flat/24.png">
+            </span>
+      <span *ngIf="driver.nationality === 'Swedish'">
+              <img src="http://www.countryflags.io/se/flat/24.png">
+            </span>
+      <span *ngIf="driver.nationality === 'Russian'">
+              <img src="http://www.countryflags.io/ru/flat/24.png">
+            </span>
+      <a class="float-right" href="{{driver.url}}" target="_blank">
+        <small>Read More</small>
+      </a>
+    </div>
+
+  </div>
+</section>
+

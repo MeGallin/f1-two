@@ -1,0 +1,10 @@
+header {
+  cursor: pointer;
+  text-align: center;
+  color: rgba(51,51,51,1);
+}
+
+.hover:hover {
+  background: rgba(255,255,255,1);
+  color: lightskyblue;
+}

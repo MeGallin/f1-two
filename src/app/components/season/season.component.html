@@ -1,0 +1,21 @@
+<section id="round">
+  <div class="text-center">
+    <h3>Rounds for {{year}}</h3>
+  </div>
+  <div class="grid_container">
+    <div class="grid_item" *ngFor="let season of seasonData">
+      <div *ngIf="date > season.date">
+        <del class="small text-muted"> Round {{season.round}}
+          {{season.raceName}}
+          {{season.Circuit.circuitName}}
+        </del>
+      </div>
+
+      <div *ngIf="date < season.date">
+        <div>Round {{season.round}} : {{season.raceName}}</div>
+        <span class="h5">{{season.Circuit.circuitName}}</span>
+        <div class="small">{{season.date}} {{season.time}}</div>
+      </div>
+    </div>
+  </div>
+</section>
