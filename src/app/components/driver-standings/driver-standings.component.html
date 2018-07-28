@@ -1,0 +1,74 @@
+<hr class="style">
+<div class="row">
+  <div class="col-2">
+    <input class="form-control" #foo type="number" [value]="currentYear" [max]="currentYear">
+  </div>
+  <div class="col-1">
+    <button class="btn btn-dark" (click)="getDate(foo.value)">Select Year</button>
+  </div>
+  <div class="col">
+    <span class="h3" *ngIf="!year">Driver Standings {{currentYear}}</span>
+    <span class="h3" *ngIf="year">Driver Standings {{year}}</span>
+  </div>
+</div>
+
+<hr class="style">
+<div *ngFor="let standings of driverStandings">
+  <div class="row">
+    <div *ngIf="standings.position % 2 then content else alt_content"></div>
+    <ng-template #content>
+      <div class="offset-3 col-3">
+        <div class="row">
+          <div class="col-2 bg-green">
+            <h3>{{standings.position}}</h3>
+          </div>
+          <div class="col-5 bg-blue">
+            {{standings.Driver.givenName}}
+            {{standings.Driver.familyName}}
+            <span class="small">[{{standings.Driver.permanentNumber}}]</span>
+          </div>
+          <div class="col-5 bg-orange">
+            <span class="h4">{{standings.points}} </span>
+            <small>Points</small>
+            <div></div>
+            <span class="h4">{{standings.wins}} </span>
+            <small>Wins</small>
+          </div>
+          <div class="col-12 bg-white text-center text-dark">
+            {{standings.Constructors[0]?.name}}
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template #alt_content>
+      <div class="offset-6 col-3">
+        <div class="row">
+          <div class="col-2 bg-green">
+            <h3>{{standings.position}}</h3>
+          </div>
+          <div class="col-5 bg-blue">
+            {{standings.Driver.givenName}}
+            {{standings.Driver.familyName}}
+            <span class="small">[{{standings.Driver.permanentNumber}}]</span>
+          </div>
+
+          <div class="col-5 bg-orange">
+            <span class="h4">{{standings.points}} </span>
+            <small>Points</small>
+            <div></div>
+            <span class="h4">{{standings.wins}} </span>
+            <small>Wins</small>
+          </div>
+
+          <div class="col-12 bg-white text-dark text-center">
+            {{standings.Constructors[0]?.name}}
+          </div>
+
+        </div>
+      </div>
+    </ng-template>
+  </div>
+
+
+</div>

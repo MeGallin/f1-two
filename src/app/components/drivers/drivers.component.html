@@ -2,22 +2,33 @@
   <div class="text-center">
     <h3>Drivers</h3>
   </div>
-  <div class="selectWrapper">
-    <select #foo (click)="yearDropDown(foo.value)">
-      <option [value]="null" selected>Select Year</option>
-      <option *ngFor="let list of yearDropDownList"
-              [value]="list"
-      >{{list}}
-      </option>
-    </select>
-  </div>
 
+  <div class="row">
+    <div class="col">
+      <div class="selectWrapper">
+        <select #foo (click)="yearDropDown(foo.value)">
+          <option [value]="null" selected>Select Year</option>
+          <option *ngFor="let list of yearDropDownList"
+                  [value]="list"
+          >{{list}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <input class="form-control" type="text" [(ngModel)]="term" [placeholder]="placeholder">
+    </div>
+
+  </div>
   <hr class="style">
 
   <div class="grid_container">
-    <div class="grid_item" *ngFor="let driver of drivers">
-      [{{driver.permanentNumber}}]
-      <small>Drivers Permanent Number</small>
+    <div class="grid_item" *ngFor="let driver of drivers | filter: term">
+
+      <span *ngIf="driver.permanentNumber">
+        [{{driver.permanentNumber}}]<small>Drivers Permanent Number</small>
+      </span>
       <span><p class="h5">{{driver.givenName}}
           {{driver.familyName}}</p>
       </span>

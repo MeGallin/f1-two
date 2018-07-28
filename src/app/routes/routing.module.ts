@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from '../components/home/home.component';
 import {DriversComponent} from '../components/drivers/drivers.component';
 import {SeasonComponent} from '../components/season/season.component';
+import {DriverStandingsComponent} from '../components/driver-standings/driver-standings.component';
 
 const routes = [
   {
@@ -16,6 +17,10 @@ const routes = [
   {
     path: 'rounds',
     component: SeasonComponent
+  },
+  {
+    path: 'standings',
+    component: DriverStandingsComponent
   }
 ];
 

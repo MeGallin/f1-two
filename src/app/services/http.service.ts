@@ -32,4 +32,9 @@ export class HttpService {
     return this._http.get(latestResultsRounds);
   }
 
+  fetchDriverStandings(year) {
+    const driverStandingsUrl = 'http://ergast.com/api/f1/' + year + '/driverStandings.json?callback';
+    return this._http.get(driverStandingsUrl);
+  }
+
 }

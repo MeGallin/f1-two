@@ -6,7 +6,8 @@ body {
   background-size: cover;
   color: white;
 }
-h1,h2,h3,h4,h5 {
+
+h1, h2, h3, h4, h5 {
   color: white;
 }
 
@@ -15,16 +16,17 @@ h1,h2,h3,h4,h5 {
 }
 
 .bg-cell {
-  background: rgba(51,51,51,0.85);
+  background: rgba(51, 51, 51, 0.85);
 }
 
 .grid_container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 12px;
 }
+
 .grid_item {
-   background: rgba(255,255,255,0.6);
+  background: rgba(255, 255, 255, 0.6);
   padding: 1%;
 }
 
@@ -34,8 +36,8 @@ h1,h2,h3,h4,h5 {
   overflow: hidden;
   position: relative;
   border: 1px solid #bbb;
-  border-radius: 2px;
-  background:#FFFFFF url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2211%22%20height%3D%2211%22%20viewBox%3D%220%200%2011%2011%22%3E%3Cpath%20d%3D%22M4.33%208.5L0%201L8.66%201z%22%20fill%3D%22%2300AEA9%22%2F%3E%3C%2Fsvg%3E') right 13px center no-repeat;
+  border-radius: 12px;
+  background: #FFFFFF url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2211%22%20height%3D%2211%22%20viewBox%3D%220%200%2011%2011%22%3E%3Cpath%20d%3D%22M4.33%208.5L0%201L8.66%201z%22%20fill%3D%22%2300AEA9%22%2F%3E%3C%2Fsvg%3E') right 13px center no-repeat;
 }
 
 .selectWrapper select {
@@ -43,7 +45,7 @@ h1,h2,h3,h4,h5 {
   font-size: 18px;
   line-height: 18px;
   width: 100%;
-  border: none;
+  border-radius: 12px;
   box-shadow: none;
   background: transparent;
   background-image: none;
@@ -54,6 +56,7 @@ h1,h2,h3,h4,h5 {
   text-indent: 0.01px;
   text-overflow: ellipsis;
 }
+
 /* ++++++++++++++++++ Select option styling +++++++++++++++++++++++ */
 /* GA Helper classes */
 hr.style {
@@ -61,8 +64,25 @@ hr.style {
   height: 1px;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
+
 .border-temp {
   border: green 2px solid;
+}
+
+.bg-green {
+  background: greenyellow;
+}
+
+.bg-blue {
+  background: blue;
+}
+
+.bg-orange {
+  background: orangered;
+}
+
+.bg-white {
+  background: white;
 }
 
 /* GA Helper classes */
