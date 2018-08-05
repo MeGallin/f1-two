@@ -1,0 +1,12 @@
+<div id="ticker" class="ticker-wrap">
+  <div class="ticker">
+    <div *ngFor="let feed of rssFeeds" class="ticker__item">
+     <small>{{feed.title}}</small>
+    </div>
+    <div *ngIf="!rssFeeds">
+        <div *ngFor="let message of newMessages">
+        <small>{{message.message}}</small>
+      </div>
+    </div>
+  </div>
+</div>
