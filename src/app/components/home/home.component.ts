@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   public latestRound;
   public raceName;
 
+
   public placeholder = 'search';
 
   public rounds = [1, 2, 3, 4, 5];
@@ -51,11 +52,13 @@ export class HomeComponent implements OnInit {
         this.latestRounds = new Array(this.latestRounds);
         this.latestRounds = this.latestRounds[0].MRData.RaceTable.Races;
         this.latestRound = this.latestRounds[0].round;
+
       },
       error => {
         console.error('Error load data');
         return throwError(error);
       });
+
 
 
   } // End ngOnInIt

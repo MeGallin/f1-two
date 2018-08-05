@@ -1,12 +1,12 @@
 <hr class="style">
 <div class="row">
-  <div class="col-2">
+  <div class="col-lg-2">
     <input class="form-control" #foo type="number" [value]="currentYear" [max]="currentYear">
   </div>
-  <div class="col-1">
+  <div class="col-lg-1">
     <button class="btn btn-dark" (click)="getDate(foo.value)">Select Year</button>
   </div>
-  <div class="col">
+  <div class="col-6 text-center">
     <span class="h3" *ngIf="!year">Driver Standings {{currentYear}}</span>
     <span class="h3" *ngIf="year">Driver Standings {{year}}</span>
   </div>
@@ -17,7 +17,7 @@
   <div class="row">
     <div *ngIf="standings.position % 2 then content else alt_content"></div>
     <ng-template #content>
-      <div class="offset-3 col-3">
+      <div class="offset-lg-3 col-lg-3">
         <div class="row">
           <div class="col-2 bg-green">
             <h3>{{standings.position}}</h3>
@@ -42,7 +42,7 @@
     </ng-template>
 
     <ng-template #alt_content>
-      <div class="offset-6 col-3">
+      <div class="offset-lg-6 col-lg-3">
         <div class="row">
           <div class="col-2 bg-green">
             <h3>{{standings.position}}</h3>

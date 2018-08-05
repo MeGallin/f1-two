@@ -18,6 +18,7 @@ import {DriverStandingsComponent} from './components/driver-standings/driver-sta
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import { SearchComponent } from './components/common/search/search.component';
 import { GrandPrixPipe } from './pipes/grand-prix.pipe';
+import { TickerComponent } from './components/ticker/ticker.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { GrandPrixPipe } from './pipes/grand-prix.pipe';
     SideMenuComponent,
     DriverStandingsComponent,
     SearchComponent,
-    GrandPrixPipe
+    GrandPrixPipe,
+    TickerComponent
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule, Ng2SearchPipeModule],
   providers: [],
