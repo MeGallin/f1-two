@@ -1,17 +1,16 @@
+<div class="search_position" (click)="show=!show">Other Motoracing News</div>
 <nav>
-  <button (click)="show=!show">More Results</button>
   <div *ngIf="show" class="animated slideInRight side_menu">
-    <h3>Round Statistics</h3>
     <div class="grid_container">
-      <div class="grid_item border-temp">
-        link 1
+      <div class="grid_item">
+        <a routerLink="/motogp">Moto GP News</a>
       </div>
-      <div class="grid_item border-temp">
-        link 2
+      <div class="grid_item">
+        <a routerLink="/rally">World Rally Championship News</a>
       </div>
-      <div class="grid_item border-temp">
-        link 3
-      </div>
+      <!--<div class="grid_item">-->
+      <!--<a routerLink="/driver-stats">F1 Driver Statistics</a>-->
+      <!--</div>-->
     </div>
   </div>
 </nav>

@@ -1,0 +1,41 @@
+<section id="motoGP">
+  <div class="row">
+    <div class="col-md bg-cell">
+
+      <div *ngIf="!rssMotoGpFeeds">
+        <div *ngFor="let message of newMessages">
+          <div class="text-center">
+            <h1>{{message.message}}</h1>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sticky_header">MotoGP News</h3>
+      <div *ngFor="let feed of rssMotoGpFeeds">
+        <span class="h5 h5_styling underline_red">{{feed.title}}</span>
+        <p>{{feed.content}}</p>
+        <small>{{feed.pubDate}}</small>
+        <hr class="style">
+      </div>
+    </div>
+    <div class="col-md bg-cell">
+      <h3 class="sticky_header">Moto2 News</h3>
+      <div *ngFor="let feed of rssMoto2Feeds">
+        <span class="h5 h5_styling underline_orange">{{feed.title}}</span>
+        <p>{{feed.content}}</p>
+        <small>{{feed.pubDate}}</small>
+        <hr class="style">
+      </div>
+    </div>
+    <div class="col-md bg-cell">
+      <h3 class="sticky_header">Moto3 News</h3>
+      <div *ngFor="let feed of rssMoto3Feeds">
+        <span class="h5 h5_styling underline_yellow">{{feed.title}}</span>
+        <p>{{feed.content}}</p>
+        <small>{{feed.pubDate}}</small>
+        <hr class="style">
+      </div>
+    </div>
+
+  </div>
+</section>

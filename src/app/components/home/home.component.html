@@ -3,15 +3,42 @@
     <div *ngIf="date > season.date">
       <div class="p-1">
         <div (click)="roundNumber(season.round)">
-          <small>{{season.raceName | slice:0:-10}}GP</small>
+          <small class="genral_a_tag">{{season.raceName | slice:0:-10}}GP</small>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<div *ngIf="hamilton === true">
+  <div *ngFor="let driver of drivers">
+    <div *ngIf="driver.driverId === 'hamilton'">
+      <span *ngIf="driver.permanentNumber">
+        [{{driver.permanentNumber}}]<small>Drivers Permanent Number</small>
+      </span>
+      <span>
+        <p class="h5">{{driver.givenName}}
+          {{driver.familyName}}</p>
+      </span>
+      <div>
+        <small>Born: {{driver.dateOfBirth}}</small>
+      </div>
+      {{driver.nationality}}
+      <span *ngIf=" driver.nationality === 'British'">
+        <img src="http://www.countryflags.io/gb/flat/24.png">
+      </span>
+      <a href="{{driver.url}}" target="_blank">
+        <small>Read More</small>
+      </a>
+    </div>
+  </div>
+</div>
+<ag-grid-angular style="width: 100%; height: 620px;" class="ag-theme-balham" [enableSorting]="true" [rowData]="latestResults"
+  [columnDefs]="columnDefs" [enableFilter]="true" (cellClicked)="onCellClicked($event)">
+</ag-grid-angular>
 
-<!--<app-side-menu></app-side-menu>-->
+
+<app-side-menu class="genral_a_tag"></app-side-menu>
 
 <div *ngIf="!round" class="row">
   <div class="col-12 text-center" *ngFor="let result of latestRounds">
@@ -46,53 +73,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -125,12 +152,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 
 <div *ngIf="round == 1">
   <div *ngFor="let result of latestResultsRounds">
@@ -147,53 +175,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -226,12 +254,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 <div *ngIf="round == 2">
   <div *ngFor="let result of latestResultsRounds">
     <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
@@ -247,53 +276,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -326,12 +355,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 <div *ngIf="round == 3">
   <div *ngFor="let result of latestResultsRounds">
     <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
@@ -347,53 +377,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -426,12 +456,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 <div *ngIf="round == 4">
   <div *ngFor="let result of latestResultsRounds">
     <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
@@ -447,53 +478,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -526,12 +557,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 <div *ngIf="round == 5">
   <div *ngFor="let result of latestResultsRounds">
     <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
@@ -547,53 +579,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -626,12 +658,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 <div *ngIf="round == 6">
   <div *ngFor="let result of latestResultsRounds">
     <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
@@ -647,53 +680,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -726,12 +759,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 <div *ngIf="round == 7">
   <div *ngFor="let result of latestResultsRounds">
     <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
@@ -747,53 +781,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -826,12 +860,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 <div *ngIf="round == 8">
   <div *ngFor="let result of latestResultsRounds">
     <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
@@ -847,53 +882,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -926,12 +961,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 <div *ngIf="round == 9">
   <div *ngFor="let result of latestResultsRounds">
     <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
@@ -947,53 +983,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -1026,12 +1062,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 <div *ngIf="round == 10">
   <div *ngFor="let result of latestResultsRounds">
     <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
@@ -1047,53 +1084,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -1126,12 +1163,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 <div *ngIf="round == 11">
   <div *ngFor="let result of latestResultsRounds">
     <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
@@ -1147,53 +1185,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -1226,12 +1264,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 <div *ngIf="round == 12">
   <div *ngFor="let result of latestResultsRounds">
     <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
@@ -1247,53 +1286,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -1326,12 +1365,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 <div *ngIf="round == 13">
   <div *ngFor="let result of latestResultsRounds">
     <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
@@ -1347,53 +1387,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -1426,12 +1466,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 <div *ngIf="round == 14">
   <div *ngFor="let result of latestResultsRounds">
     <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
@@ -1447,53 +1488,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -1526,12 +1567,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 <div *ngIf="round == 15">
   <div *ngFor="let result of latestResultsRounds">
     <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
@@ -1547,53 +1589,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -1626,12 +1668,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 <div *ngIf="round == 16">
   <div *ngFor="let result of latestResultsRounds">
     <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
@@ -1647,53 +1690,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -1726,12 +1769,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 <div *ngIf="round == 17">
   <div *ngFor="let result of latestResultsRounds">
     <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
@@ -1747,53 +1791,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -1826,12 +1870,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 <div *ngIf="round == 18">
   <div *ngFor="let result of latestResultsRounds">
     <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
@@ -1847,53 +1892,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -1926,12 +1971,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 <div *ngIf="round == 19">
   <div *ngFor="let result of latestResultsRounds">
     <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
@@ -1947,53 +1993,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -2026,12 +2072,13 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->
 <div *ngIf="round == 20">
   <div *ngFor="let result of latestResultsRounds">
     <div class="d-flex justify-content-around text-center flex-wrap border-temp-red bg-cell">
@@ -2047,53 +2094,53 @@
           <span *ngIf="! result.number">XXX</span>
         </div>
         <span *ngIf=" result.Driver.nationality === ''">
-              {{ result.Driver.nationality}}
-            </span>
+          {{ result.Driver.nationality}}
+        </span>
         <span *ngIf=" result.Driver.nationality === 'German'">
-              <img src="http://www.countryflags.io/de/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/de/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'British'">
-              <img src="http://www.countryflags.io/gb/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/gb/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Finnish'">
-              <img src="http://www.countryflags.io/fi/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fi/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Australian'">
-              <img src="http://www.countryflags.io/au/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/au/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Spanish'">
-              <img src="http://www.countryflags.io/es/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/es/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Dutch'">
-              <img src="http://www.countryflags.io/nl/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nl/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Belgian'">
-              <img src="http://www.countryflags.io/be/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/be/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Mexican'">
-              <img src="http://www.countryflags.io/mx/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mx/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'French'">
-              <img src="http://www.countryflags.io/fr/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/fr/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Monegasque'">
-              <img src="http://www.countryflags.io/mc/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/mc/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Canadian'">
-              <img src="http://www.countryflags.io/ca/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ca/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'New Zealander'">
-              <img src="http://www.countryflags.io/nz/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/nz/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Danish'">
-              <img src="http://www.countryflags.io/dk/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/dk/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Swedish'">
-              <img src="http://www.countryflags.io/se/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/se/flat/24.png">
+        </span>
         <span *ngIf=" result.Driver.nationality === 'Russian'">
-              <img src="http://www.countryflags.io/ru/flat/24.png">
-            </span>
+          <img src="http://www.countryflags.io/ru/flat/24.png">
+        </span>
       </div>
       <div class="p-1">
         <div class="small border-bottom border-primary">Pole</div>
@@ -2126,12 +2173,10 @@
       </div>
       <div class="p-1">
         <div class="small border-bottom border-warning">Speed</div>
-        {{ result.FastestLap?.AverageSpeed.speed}} <span
-        class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
+        {{ result.FastestLap?.AverageSpeed.speed}} <span class="small">{{ result.FastestLap?.AverageSpeed?.units}}</span>
       </div>
     </div>
-  </div><!--End of ngFor-->
-</div><!--End of ngIf-->
-
-
-
+  </div>
+  <!--End of ngFor-->
+</div>
+<!--End of ngIf-->

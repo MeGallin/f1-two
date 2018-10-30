@@ -1,0 +1,26 @@
+.h5_styling {
+  text-decoration: underline;
+  -webkit-text-underline-position: under;
+  -ms-text-underline-position: below;
+  text-underline-position: under;
+}
+.underline_red {
+  -webkit-text-decoration-color: crimson; /* Safari */
+  text-decoration-color: crimson;
+}
+.underline_orange {
+  -webkit-text-decoration-color: orange; /* Safari */
+  text-decoration-color: orange;
+}
+.underline_yellow {
+  -webkit-text-decoration-color: yellow; /* Safari */
+  text-decoration-color: yellow;
+}
+
+.sticky_header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background: white;
+  color: rgba(51, 51, 51, 1);
+}

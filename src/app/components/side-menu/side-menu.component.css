@@ -1,6 +1,10 @@
+.search_position {
+  display: inline-block;
+  width: auto;
+}
+
 .side_menu {
-  background: floralwhite;
-  color: rgba(51,51,51,1);
+  background: rgba(220, 220, 220, 0.9);
   position: fixed;
   left: auto;
   top: 0;
@@ -10,6 +14,7 @@
   min-width: 250px;
   z-index: 9999;
 }
+
 .animated {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;

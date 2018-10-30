@@ -47,7 +47,7 @@ export class TickerComponent implements OnInit {
       this.message = data;
       this.newMessages = Array(10).fill(this.message);
       this.newMessages = new Array({'message': this.newMessages});
-      console.log(this.newMessages);
+      // console.log(this.newMessages);
     });
 
     setTimeout(() => {
@@ -56,7 +56,7 @@ export class TickerComponent implements OnInit {
 
 
     timer(1000, 60000 * 30)
-      .pipe(switchMap(() => this._http.fetchRss()))
+      .pipe(switchMap(() => this._http.fetchF1Rss()))
       .subscribe(data => {
           this.rssFeeds = data;
           this.rssFeeds = new Array(this.rssFeeds);

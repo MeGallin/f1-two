@@ -1,3 +1,10 @@
+@import "~ag-grid/dist/styles/ag-grid.css";
+@import "~ag-grid/dist/styles/ag-theme-balham.css";
+@import "~ag-grid/dist/styles/ag-theme-fresh.css";
+@import "~ag-grid/dist/styles/ag-theme-bootstrap.css";
+@import "~ag-grid/dist/styles/ag-theme-material.css";
+
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic');
 body {
   background: url(./assets/latest.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -5,8 +12,15 @@ body {
   -o-background-size: cover;
   background-size: cover;
   color: white;
+  font-family: 'Nanum Gothic', sans-serif;
 }
-
+.genral_a_tag {
+  color: white;
+  cursor: pointer;
+}
+.genral_a_tag:hover {
+  color: blue;
+}
 h1, h2, h3, h4, h5 {
   color: white;
 }

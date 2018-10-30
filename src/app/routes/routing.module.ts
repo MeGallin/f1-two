@@ -4,6 +4,9 @@ import {HomeComponent} from '../components/home/home.component';
 import {DriversComponent} from '../components/drivers/drivers.component';
 import {SeasonComponent} from '../components/season/season.component';
 import {DriverStandingsComponent} from '../components/driver-standings/driver-standings.component';
+import {MotoGpComponent} from '../components/moto-gp/moto-gp.component';
+import {WorldRallyComponent} from '../components/world-rally/world-rally.component';
+import {DriverStatsComponent} from '../components/driver-stats/driver-stats.component';
 
 const routes = [
   {
@@ -21,6 +24,18 @@ const routes = [
   {
     path: 'standings',
     component: DriverStandingsComponent
+  },
+  {
+    path: 'motogp',
+    component: MotoGpComponent
+  },
+  {
+    path: 'rally',
+    component: WorldRallyComponent
+  },
+  {
+    path: 'driver-stats',
+    component: DriverStatsComponent
   }
 ];
 
