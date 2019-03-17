@@ -4,7 +4,7 @@
   </div>
 
   <div class="row">
-    <div class="col">
+    <div class="col-md-3">
       <div class="selectWrapper">
         <select #foo (click)="yearDropDown(foo.value)">
           <option [value]="null" selected>Select Year</option>
@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <div class="col-3">
+    <div class="col-md-3">
       <input class="form-control" type="text" [(ngModel)]="term" [placeholder]="placeholder">
     </div>
 

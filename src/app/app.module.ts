@@ -26,6 +26,7 @@ import {MotoGpComponent} from './components/moto-gp/moto-gp.component';
 import {WorldRallyComponent} from './components/world-rally/world-rally.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { DriverStatsComponent } from './components/driver-stats/driver-stats.component';
+import { GraphStatsComponent } from './components/graph-stats/graph-stats.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { DriverStatsComponent } from './components/driver-stats/driver-stats.com
     TickerComponent,
     MotoGpComponent,
     WorldRallyComponent,
-    DriverStatsComponent
+    DriverStatsComponent,
+    GraphStatsComponent
   ],
   imports: [
     BrowserModule,

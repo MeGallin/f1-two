@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
         this.drivers = data[0];
         this.drivers = new Array(this.drivers);
         this.drivers = this.drivers[0].MRData.DriverTable.Drivers;
-        console.log(this.drivers);
+        // console.log(this.drivers);
 
         this.latestResults = data[2];
         this.latestResults = new Array(this.latestResults);

@@ -7,6 +7,7 @@ import {DriverStandingsComponent} from '../components/driver-standings/driver-st
 import {MotoGpComponent} from '../components/moto-gp/moto-gp.component';
 import {WorldRallyComponent} from '../components/world-rally/world-rally.component';
 import {DriverStatsComponent} from '../components/driver-stats/driver-stats.component';
+import { GraphStatsComponent } from '../components/graph-stats/graph-stats.component';
 
 const routes = [
   {
@@ -36,6 +37,10 @@ const routes = [
   {
     path: 'driver-stats',
     component: DriverStatsComponent
+  },
+  {
+    path: 'graph-stats',
+    component: GraphStatsComponent
   }
 ];
 

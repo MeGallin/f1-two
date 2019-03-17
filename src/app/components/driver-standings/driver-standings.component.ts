@@ -23,7 +23,6 @@ export class DriverStandingsComponent implements OnInit {
         this.driverStandings = data;
         this.driverStandings = new Array(this.driverStandings);
         this.driverStandings = this.driverStandings[0].MRData.StandingsTable.StandingsLists[0].DriverStandings;
-
       },
       error => {
         console.error('Error load data');
